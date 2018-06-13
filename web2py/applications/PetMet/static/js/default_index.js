@@ -31,7 +31,8 @@ var app = function() {
                 user_id
             },
             function(data) {
-                self.vue.images = data.images;
+                //self.vue.images = data.images;
+                self.vue.show_img.unshift(data.show_img);
                 enumerate(self.vue.images);
             })
     };
@@ -95,12 +96,18 @@ var app = function() {
         setTimeout(function() {
             $.post(add_image_url, 
             {
-                image_url: get_url
+                image_url: get_url,
+                animal_type: self.vue.animal_type,
+                pet_name: self.vue.pet_name,
+                description: self.vue.description,
+                contact_info: self.vue.contact_info
             },
             function(data) {
-                $.web2py.enableElement($("#add_image_url"));
-                self.vue.images.unshift(data.pet_posts);
-                enumerate(self.vue.images);
+                //$.web2py.enableElement($("#add_image_url"));
+                self.vue.show_img.unshift(data.pet_posts);
+                console.log(self.vue.show_img);
+                enumerate(self.vue.show_img);
+                self.get_pet_posts;
             });
         }, 900);
     };
@@ -120,6 +127,10 @@ var app = function() {
             img_url: null,
             self_page: true ,
             show_img: false,
+            animal_type: " ",
+            pet_name: " ",
+            description: " ",
+            contact_info: " "
             
            
         },
